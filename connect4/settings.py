@@ -56,7 +56,7 @@ ROOT_URLCONF = 'connect4.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        "DIRS": ["connect4/templates"],
+        "DIRS": ["templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
