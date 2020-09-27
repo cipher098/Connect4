@@ -62,12 +62,34 @@ class GameServices:
         for move in moves:
             logger.info(move.__dict__)
             game_matrix[move.row][move.column] = move.player_color
-        response = {'game matrix': game_matrix}
+        response = {'game_matrix': game_matrix}
         return response
 
     @staticmethod
     def check_if_ended(game_uuid, player_color, current_move_id):
-        pass
+        game_matrix = GameServices.get_game_matrix(game_uuid)['game_matrix']
+        current_move = Move.objects.get(id=current_move_id)
+
+        # Check for winning condition using rows above it.
+        if current_move.row > 2:
+            pass
+
+        # Check for winning condition using rows below it.
+        if current_move.row < 3:
+            pass
+
+        # Check for winning condition using column right to it.
+        if current_move.column < 5:
+            pass
+
+        # Check for winning condition using column left to it.
+        if current_move.column > 2:
+            pass
+
+        # Check for winning condition using Top right cells.
+        if current_move.column > 2:
+            pass
+
 
     @staticmethod
     def check_game_result(game_uuid):
