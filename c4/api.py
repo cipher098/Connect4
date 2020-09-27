@@ -57,6 +57,11 @@ def make_move(request):
 
     if move_status['valid']:
         move_creation_status = MoveServices.make_move(game_uuid, column, row, player_color)
+        move_creation_status = GameServices.check_if_ended(
+            game_uuid=game_uuid,
+            player_color=player_color,
+            current_move_id=move_creation_status['move_id']
+        )
     else:
         return JsonResponse(data=move_status, status=409)
 
@@ -89,6 +94,7 @@ def check_turn(request):
     game_uuid = headers.get('HTTP_GAME_UUID', None)
     response = GameServices.check_turn(game_uuid)
     return JsonResponse(data=response, status=200)
+
 
 
 

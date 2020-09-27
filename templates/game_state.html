@@ -1,10 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .data{
+    border: 2px solid green;
+    padding: 10px;
+    height: 24px;
+    width: 40px;
+    display: inline-block;
+    text-align: center;
+    margin:0;
+}
+.headers{
+    margin-left: 30px;
+}
+.header{
+    padding: 10px;
+    min-width: 40px;
+    height: 10px;
+    display: inline-block;
+}
+.parent{
+    margin: 4px;
+    padding:0;
+}
+.yellow{
+    background-color: yellow;
+}
+.red{
+    background-color: red;
+}
+    </style>
 </head>
+
 <body>
+    <div class="table-div">
+        <b>Current Game State</b>
+        <br>
+        <br>
+        <div class='headers'>
+        <span class="header">1</span>
+        <span class="header">2</span>
+        <span class="header">3</span>
+        <span class="header">4</span>
+        <span class="header">5</span>
+        <span class="header">6</span>
+        <span class="header">7</span>
+        </div>
+        {% for data in game_matrix %}
+        <p class='parent'>
+            {{forloop.counter}}
+            {% for element in data %}
+            <span class="data{% if element == 'yellow' %} yellow{% endif %}{% if element == 'red' %} red{% endif %}">{{element}}</span>
+            {% endfor %}
+        </p>
+        {% endfor %}
+    </div>
 
 </body>
+
 </html>
