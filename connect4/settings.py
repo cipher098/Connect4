@@ -25,7 +25,7 @@ SECRET_KEY = 'zvf4p=3b%6-e-t%g@_-jd9#%0v29u9ykf_wq3kp6-jkl^n$0oi'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://py-connect4.herokuapp.com/']
 
 
 # Application definition
