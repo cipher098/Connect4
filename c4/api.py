@@ -9,9 +9,6 @@ from django.utils.decorators import decorator_from_middleware
 from django.views.decorators.csrf import csrf_exempt
 
 
-from webargs.djangoparser import use_args
-from webargs import fields
-
 from c4.models import Game, Move
 from c4.services import MoveServices, GameServices
 from c4.middlewares import GameUUIDCheckMiddleware
