@@ -68,7 +68,10 @@ def show_game_state(request):
     game_uuid = headers.get('HTTP_GAME_UUID', None)
     response = GameServices.get_game_matrix(game_uuid)
 
-    return JsonResponse(data=response, status=200)
+    return TemplateResponse(
+            request, "game_state.html", response
+        )
+    # return JsonResponse(data=response, status=200)
 
 
 def check_game_result(request):
