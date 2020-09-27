@@ -10,13 +10,20 @@ Live Demo
     :Demo: https://py-connect4.herokuapp.com/
 
 
-How to Use?
+Postman Collection
 ----------
-::
-    1. Go to home page.
+
+    :Postman: https://www.getpostman.com/collections/ffcc8b9714874a496323
 
 
-
+How To Use?
+----------
+    1. Go to postman collection, run start game api. It will return game_uuid, use that uuid for all other api call.
+    2. Make Move Red: It can be used to make move of red, just change column to one you want to make move.
+    3. Make Move Yellow: It can be used to make move of Yellow, just change column to one you want to make move.
+    4. Show Game State: It will show visualization of game.
+    5. Check turn: It tells which player turn it is.
+    6. Check Game Result: Tells game result.
 
 Basic Commands
 --------------
@@ -39,6 +46,8 @@ Local Setup
 
 6. Run server using command:
     python manage.py runserver
+
+
 
 
 
