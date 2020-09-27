@@ -40,10 +40,17 @@ def make_move(request):
     column = data.get('column', None)
     player_color = data.get('player_color', None)
 
-    # TODO: check column and player_color valid
+    errors = {}
+    if not isinstance(column, int):
+        errors['column'] = f"Column value must be int. Please try again with int value."
+    if player_color not in [Move.YELLOW, Move.RED]:
+        errors['player_color'] = f"Column value must {Move.YELLOW} or {Move.RED}." \
+                                 f" Please try again with player_color value using one of them."
+    if errors:
+        return JsonResponse(data=errors, status=422)
 
-    row = MoveServices.get_next_row(column=column,
-                                    game_uuid=game_uuid)
+
+    row = MoveServices.get_next_row(column=column, game_uuid=game_uuid)
 
     move_status = MoveServices.is_valid(
         column=column,
@@ -66,7 +73,6 @@ def make_move(request):
     else:
         return JsonResponse(data=move_status, status=409)
 
-    return HttpResponse(content="app is running", status=201)
 
 def show_game_state(request):
     headers = request.META

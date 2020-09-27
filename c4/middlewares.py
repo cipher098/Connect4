@@ -32,8 +32,6 @@ class GameUUIDCheckMiddleware:
                 response = self.get_response(request)
                 return response
             else:
-                # TODO: chnage status code
-                return HttpResponse(f"Game with UUID: {game_uuid} doesn't exst. Please check and try again.", status=404)
+                return HttpResponse(f"Game with UUID: {game_uuid} doesn't exist. Please check and try again.", status=404)
         else:
-            # TODO: chnage status code
-            return HttpResponse("UnautHorized", status=400)
+            return HttpResponse("Unauthorized", status=400)
