@@ -46,7 +46,8 @@ Local Setup
 
 6. Run server using command:
     python manage.py runserver
-
+7. Import postman collection, and create environemnt with a variable: 'local_host' having value 'http://localhost:8000'
+8. Choose the env created above and run postman as described in How to use.
 
 
 
