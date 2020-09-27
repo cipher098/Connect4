@@ -14,8 +14,11 @@ class MoveServices:
             return 5
 
     @staticmethod
-    def is_valid(column, row, upcoming_move_sequence_number, player_color):
+    def is_valid(column, row, upcoming_move_sequence_number, player_color, winner_color):
         errors = {}
+
+        if winner_color:
+            errors['winner_color'] = f"Game already won by: {winner_color}. Cannot make move."
         if column > 6:
             errors['column'] = f"column: {column} is not valid, it is greater than 6."
         if column < 0:
@@ -72,27 +75,28 @@ class GameServices:
         game_ended = False
         response = {'game_ended': game_ended}
         # Check for winning condition using rows above it.
+        import pdb;pdb.set_trace()
         if current_move.row >= 3:
-            n_moves = len(Move.objects.filter(game__uuid=game_uuid, row__gte=3, column=current_move.column, player_color=player_color))
+            n_moves = len(Move.objects.filter(game__uuid=game_uuid, row__lte=3, column=current_move.column, player_color=player_color))
             if n_moves >= 4:
                 game_ended = True
 
 
         # Check for winning condition using rows below it.
         if current_move.row <= 2:
-            n_moves = len(Move.objects.filter(game__uuid=game_uuid, row__lte=2, column=current_move.column, player_color=player_color))
+            n_moves = len(Move.objects.filter(game__uuid=game_uuid, row__gte=2, column=current_move.column, player_color=player_color))
             if n_moves >= 4:
                 game_ended = True
 
         # Check for winning condition using column right to it.
         if current_move.column <= 4:
-            n_moves = len(Move.objects.filter(game__uuid=game_uuid, column__lte=4, row=current_move.row, player_color=player_color))
+            n_moves = len(Move.objects.filter(game__uuid=game_uuid, column__gte=4, row=current_move.row, player_color=player_color))
             if n_moves >= 4:
                 game_ended = True
 
         # Check for winning condition using column left to it.
         if current_move.column >= 3:
-            n_moves = len(Move.objects.filter(game__uuid=game_uuid, column__gte=3, row=current_move.row, player_color=player_color))
+            n_moves = len(Move.objects.filter(game__uuid=game_uuid, column__lte=3, row=current_move.row, player_color=player_color))
             if n_moves >= 4:
                 game_ended = True
 

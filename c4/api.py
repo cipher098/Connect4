@@ -52,7 +52,8 @@ def make_move(request):
         column=column,
         row=row,
         upcoming_move_sequence_number=game.upcoming_move_sequence_number,
-        player_color=player_color
+        player_color=player_color,
+        winner_color=game.winner_color
     )
 
     if move_status['valid']:
