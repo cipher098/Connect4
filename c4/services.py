@@ -76,26 +76,41 @@ class GameServices:
         response = {'game_ended': game_ended}
         # Check for winning condition using rows above it.
         if current_move.row >= 3:
-            n_moves = len(Move.objects.filter(game__uuid=game_uuid, row__lte=3, column=current_move.column, player_color=player_color))
+            n_moves = 0
+            n_moves += game_matrix[current_move.row][current_move.column] == player_color
+            n_moves += game_matrix[current_move.row - 1][current_move.column] == player_color
+            n_moves += game_matrix[current_move.row - 2][current_move.column] == player_color
+            n_moves += game_matrix[current_move.row - 3][current_move.column] == player_color
             if n_moves >= 4:
                 game_ended = True
 
-
         # Check for winning condition using rows below it.
         if current_move.row <= 2:
-            n_moves = len(Move.objects.filter(game__uuid=game_uuid, row__gte=2, column=current_move.column, player_color=player_color))
+            n_moves = 0
+            n_moves += game_matrix[current_move.row][current_move.column] == player_color
+            n_moves += game_matrix[current_move.row + 1][current_move.column] == player_color
+            n_moves += game_matrix[current_move.row + 2][current_move.column] == player_color
+            n_moves += game_matrix[current_move.row + 3][current_move.column] == player_color
             if n_moves >= 4:
                 game_ended = True
 
         # Check for winning condition using column right to it.
         if current_move.column <= 4:
-            n_moves = len(Move.objects.filter(game__uuid=game_uuid, column__gte=4, row=current_move.row, player_color=player_color))
+            n_moves = 0
+            n_moves += game_matrix[current_move.row][current_move.column] == player_color
+            n_moves += game_matrix[current_move.row][current_move.column+1] == player_color
+            n_moves += game_matrix[current_move.row][current_move.column+2] == player_color
+            n_moves += game_matrix[current_move.row][current_move.column+3] == player_color
             if n_moves >= 4:
                 game_ended = True
 
         # Check for winning condition using column left to it.
         if current_move.column >= 3:
-            n_moves = len(Move.objects.filter(game__uuid=game_uuid, column__lte=3, row=current_move.row, player_color=player_color))
+            n_moves = 0
+            n_moves += game_matrix[current_move.row][current_move.column] == player_color
+            n_moves += game_matrix[current_move.row][current_move.column - 1] == player_color
+            n_moves += game_matrix[current_move.row][current_move.column - 2] == player_color
+            n_moves += game_matrix[current_move.row][current_move.column - 3] == player_color
             if n_moves >= 4:
                 game_ended = True
 
