@@ -57,11 +57,14 @@ def make_move(request):
 
     if move_status['valid']:
         move_creation_status = MoveServices.make_move(game_uuid, column, row, player_color)
-        move_creation_status = GameServices.check_if_ended(
+        game_status = GameServices.check_if_ended(
             game_uuid=game_uuid,
             player_color=player_color,
             current_move_id=move_creation_status['move_id']
         )
+        response = game_status
+        response['move_id'] = move_creation_status['move_id']
+        return JsonResponse(data=response, status=201)
     else:
         return JsonResponse(data=move_status, status=409)
 
