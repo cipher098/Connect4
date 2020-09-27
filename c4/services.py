@@ -7,11 +7,11 @@ class MoveServices:
 
     @staticmethod
     def get_next_row(column, game_uuid):
-        last_move_in_column = Move.objects.filter(game__uuid=game_uuid, column=column).order_by('-row').first()
+        last_move_in_column = Move.objects.filter(game__uuid=game_uuid, column=column).order_by('row').first()
         if last_move_in_column:
-            return last_move_in_column.row + 1
+            return last_move_in_column.row - 1
         else:
-            return 0
+            return 5
 
     @staticmethod
     def is_valid(column, row, upcoming_move_sequence_number, player_color):
@@ -69,7 +69,8 @@ class GameServices:
     def check_if_ended(game_uuid, player_color, current_move_id):
         game_matrix = GameServices.get_game_matrix(game_uuid)['game_matrix']
         current_move = Move.objects.get(id=current_move_id)
-
+        game_ended = False
+        response = {'game_ended': game_ended}
         # Check for winning condition using rows above it.
         if current_move.row > 2:
             pass
@@ -87,8 +88,30 @@ class GameServices:
             pass
 
         # Check for winning condition using Top right cells.
-        if current_move.column > 2:
+        if current_move.column <= 3 and current_move.row >=3:
             pass
+
+        # Check for winning condition using Top left cells.
+        if current_move.column >= 3 and current_move.row >= 3:
+            pass
+
+        # Check for winning condition using bottom right cells.
+        if current_move.column <= 3 and current_move.row <= 2:
+            pass
+
+        # Check for winning condition using bottom left cells.
+        if current_move.column >= 3 and current_move.row <= 2:
+            pass
+
+        if game_ended:
+            game = Game.objects.get(uuid=game_uuid)
+            game.winner_color = player_color
+            game.save()
+            response['game_ended'] = game_ended
+            response['winner'] = player_color
+
+        return response
+
 
 
     @staticmethod
