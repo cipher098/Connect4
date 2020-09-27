@@ -33,7 +33,7 @@ class MoveServices:
             errors['player_color'] = f"player_color: {player_color} cannot make move, as it is even move."
 
         response = {'valid': len(errors)==0, 'errors': errors}
-
+        import pdb;pdb.set_trace()
         return response
 
     @staticmethod
