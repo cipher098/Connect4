@@ -95,7 +95,7 @@ class GameServices:
                 game_ended = True
 
         # Check for winning condition using column right to it.
-        if current_move.column <= 4:
+        if current_move.column <= 3:
             n_moves = 0
             n_moves += game_matrix[current_move.row][current_move.column] == player_color
             n_moves += game_matrix[current_move.row][current_move.column+1] == player_color
