@@ -24,7 +24,7 @@ class MoveServices:
         if row > 5:
             errors['row'] = f"row: {row} is not valid, it is greater than 5."
         if row < 0:
-            errors['row'] = f"row: {row} is not valid, it is less than 0."
+            errors['row'] = f"row: {row} is not valid, it is less than 0. So column is filled, cannot make move in this column."
 
         if upcoming_move_sequence_number % 2 and player_color == Move.RED:
             errors['player_color'] = f"player_color: {player_color} cannot make move, as it is odd move."
@@ -33,7 +33,6 @@ class MoveServices:
             errors['player_color'] = f"player_color: {player_color} cannot make move, as it is even move."
 
         response = {'valid': len(errors)==0, 'errors': errors}
-        import pdb;pdb.set_trace()
         return response
 
     @staticmethod
